@@ -20,6 +20,23 @@ Using `pandapower`, a load flow simulation was developed to diagnose the root ca
 **The validated solution:** 
 Instead of costly cable resizing, the simulation proved that adjusting the transformer primary tap to **1.03 pu (412 V)** successfully compensated for the voltage drop. The model verifies that under this adjustment, the furthest node maintains a healthy 395 V, returning motor current draw to nominal levels and eliminating VFD trips, while keeping all cable thermal loadings safely below 75%.
 
+## 📈 Visual Simulation (Power World Simulator)
+
+### 1. Baseline: Original 2-Pump Operation
+Before the expansion, the network stably supported the two existing 132 kW pumps. Node B7 voltage remained within optimal operational limits.
+<img width="1287" height="777" alt="00_Baseline_2_Pumps" src="https://github.com/user-attachments/assets/92e14920-b20e-4263-8ed7-51ef262969a6" />
+
+
+### 2. The Problem: 3-Pump Expansion Voltage Drop
+Adding the third pump increased the load on the transformer and the main lines. The simulation reveals a critical voltage drop at the furthest node (Pump B7 drops to ~380V), forcing the motor to draw excess current and triggering VFD thermal faults.
+<img width="1335" height="746" alt="01_Problem_Voltage_Drop" src="https://github.com/user-attachments/assets/16940642-6ba9-412d-9fc7-5afddde3d205" />
+
+### 3. The Solution: Tap Adjustment (1.03 p.u.)
+Without replacing any cables, adjusting the transformer tap to 1.03 pu compensates for the internal and line losses. The voltage at Node B7 is restored to a safe 395V, stabilizing the current draw and resolving the VFD trips.
+<img width="1337" height="747" alt="02_Solution_Tap_Adjustement" src="https://github.com/user-attachments/assets/90a3e153-6b26-4343-8199-a020fd5829c7" />
+
+
+
 ## 🚀 How to Run
 1. Install requirements: `pip install pandapower pandas xlsxwriter`
 2. Execute the simulation: `python load_flow_3_pumps.py`
